@@ -47,6 +47,9 @@ export const useSocketStore = defineStore('socket', {
 
             this.socket.on('room', (data) => {
                 console.log(data)
+                const messages = this.roomMessageMap.get(data.room) || []
+                messages.push(data)
+                this.roomMessageMap.set(data.room, messages)
             })
 
         },
