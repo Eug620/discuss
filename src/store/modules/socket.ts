@@ -18,6 +18,7 @@ export const useSocketStore = defineStore('socket', {
             })
             this.socket.on('connect', () => {
                 console.log('connect')
+                this.socket && this.socket.emit('init')
             })
             this.socket.on('disconnect', () => {
                 console.log('disconnect')
@@ -48,7 +49,6 @@ export const useSocketStore = defineStore('socket', {
                 console.log(data)
             })
 
-            this.socket.emit('init')
         },
         disconnect() {
             this.socket?.disconnect()
