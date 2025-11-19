@@ -17,6 +17,8 @@ const Url:any = {
         'register': '/user',
         'friend': '/friend',
         'roomMine': '/room/mine',
+        'room': '/room',
+        'apply': '/apply',
     }
 }
 
@@ -58,4 +60,24 @@ export default {
             method: 'get',
         })
     },
+    GetRoomInfo(id?:string) {
+        return request({
+            url: `${Url[requestServerName].room}/${id}`,
+            method: 'get'
+        })
+    },
+    GetUserInfo(id?:string) {
+        return request({
+            url: `${Url[requestServerName].register}/${id}`,
+            method: 'get'
+        })
+    },
+    apply(data?:any) {
+        return request({
+            url: `${Url[requestServerName].apply}`,
+            method: 'post',
+            data
+        })
+    },
+
 }

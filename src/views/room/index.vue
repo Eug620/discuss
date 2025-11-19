@@ -18,7 +18,7 @@
            </div>
         </div>
         <div class="w-full h-100 border-t border-gray-300 p-4 relative">
-            <textarea id="story" name="story" placeholder="Type your message..." v-model.trim="story" rows="5" cols="33" class="w-full h-full input ">
+            <textarea id="story" name="story" placeholder="Type your message..." v-model.trim="story" rows="5" cols="33" class="w-full h-full textarea ">
             </textarea>
             <button class="absolute bottom-12 right-12 " @click="handleSend">Send</button>
         </div>
@@ -46,6 +46,7 @@ const handleSend = () => {
     room: route.params.roomId,
     content: story.value,
   });
+  story.value = "";
 };
 </script>
 <style lang="">

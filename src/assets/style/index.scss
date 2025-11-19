@@ -60,6 +60,24 @@ button:active {
     transition: 0.3s;
 }
 
+.textarea {
+    border: none;
+    padding: .6rem;
+    border-radius: 1rem;
+    background: var(--bgColor);
+    box-shadow: 10px 10px 30px #c5c5c5,
+        -10px -10px 30px var(--bgColor);
+    transition: 0.3s;
+}
+
+.textarea:focus {
+    outline-color: #e8e8e8;
+    background: var(--bgColor);
+    box-shadow: inset 10px 10px 30px #c5c5c5,
+        inset -10px -10px 30px var(--bgColor);
+    transition: 0.3s;
+}
+
 
 // .switch-holder {
 //     display: flex;
