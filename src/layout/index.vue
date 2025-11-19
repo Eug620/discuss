@@ -1,12 +1,12 @@
 <template>
     <div class="w-full h-full flex">
-        <div class="w-[100px] border-r">
-            <div class="flex flex-col gap-4 p-4">
+        <div class="w-[100px] border-r border-gray-300">
+            <div class="flex flex-col gap-4 p-4 ">
                 <div v-for="tab in tabs" :key="tab.name" class="cursor-pointer" @click="activeTab = tab.name">{{
                     tab.label }}</div>
             </div>
         </div>
-        <div class="w-[200px] border-r">
+        <div class="w-[200px] border-r border-gray-300">
             <div class="flex flex-col gap-4 p-4">
                 <template v-if="activeTab === TabName.rooms">
                     <div v-for="room in userStore.rooms" @click="handleRoomClick(room)" :key="room.id"
@@ -39,11 +39,11 @@ const activeTab = ref<TabName>(TabName.rooms)
 const tabs = ref([
     {
         name: TabName.rooms,
-        label: '房间'
+        label: 'rooms'
     },
     {
         name: TabName.friends,
-        label: '好友'
+        label: 'friends'
     }
 ])
 // const collapsed = ref(false)

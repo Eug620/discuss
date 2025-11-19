@@ -77,6 +77,10 @@ export const useUserStore = defineStore('user', {
             userApi.GetRoomMine().then(res => {
                 console.log(res)
                 this.rooms = res.data.list || []
+
+                this.rooms.forEach(room => {
+                    useSocketStore().socket?.emit('join', room.id)
+                })
             })
         }
     }
