@@ -2,7 +2,7 @@
     <div class="w-full h-full flex">
         <div class="w-[100px] border-r border-gray-300">
             <div class="flex flex-col gap-4 p-4 ">
-                <div v-for="tab in tabs" :key="tab.name" class="cursor-pointer" @click="activeTab = tab.name">{{
+                <div v-for="tab in tabs" :key="tab.name" class="cursor-pointer" @click="activeTab = tab.name;searchResult = {} ">{{
                     tab.label }}</div>
             </div>
         </div>
@@ -12,8 +12,13 @@
                     <input type="text" placeholder="Search" v-model="searchQuery" class="input flex-1"/>
                     <button @click="handleSearch">Search</button>
                 </div>
-                <div class=" border-b border-gray-300 pb-4">
-                    {{searchResult.name}}
+                <div class=" border-b border-gray-300 pb-4 flex justify-between items-center">
+                    <template v-if="activeTab === TabName.rooms">
+                        {{searchResult.name}}
+                    </template>
+                    <template v-else>
+                        {{searchResult.username}}
+                    </template>
                     <button v-if="searchResult.id" @click="handleResultClick(searchResult)">Join</button>
                 </div>
                 <template v-if="activeTab === TabName.rooms">
@@ -93,7 +98,6 @@ const handleSearch = () => {
             console.log(res.data)
             searchResult.value = res.data
         })
-
     }
 }
 const handleResultClick = (result: any) => {
