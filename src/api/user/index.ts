@@ -20,6 +20,8 @@ const Url:any = {
         'room': '/room',
         'apply': '/apply',
         'applyMine': '/apply/mine',
+
+        'member': '/member',
     }
 }
 
@@ -84,6 +86,14 @@ export default {
         return request({
             url: `${Url[requestServerName].applyMine}`,
             method: 'get'
+        })
+    },
+
+    GetMemberInfo(query?:any) {
+        return request({
+            url: `${Url[requestServerName].member}`,
+            method: 'get',
+            params: query
         })
     },
 
