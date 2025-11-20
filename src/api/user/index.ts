@@ -9,7 +9,7 @@
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved. 
  */
 import request from '@/plugin/axios'
-import { cloneDeep } from 'lodash-es'
+import { cloneDeep, get } from 'lodash-es'
 
 const Url:any = {
     'server': {
@@ -18,8 +18,8 @@ const Url:any = {
         'friend': '/friend',
         'roomMine': '/room/mine',
         'room': '/room',
-        'apply': '/apply',
-        'applyMine': '/apply/mine',
+        'apply': '/apply', // 我发起的所有申请
+        'applyMine': '/apply/mine', // 别人申请我的
 
         'member': '/member',
     }
@@ -79,6 +79,20 @@ export default {
         return request({
             url: `${Url[requestServerName].apply}`,
             method: 'post',
+            data
+        })
+    },
+    getApply() {
+        return request({
+            url: `${Url[requestServerName].apply}`,
+            method: 'get'
+        })
+    },
+    // 处理申请
+    handleApply(data?:any) {
+        return request({
+            url: `${Url[requestServerName].apply}/${data.id}`,
+            method: 'PATCH',
             data
         })
     },
