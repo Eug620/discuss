@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full flex">
-    <div class="w-[200px] border-r border-gray-300 flex flex-col">
+    <div class="w-[120px] border-r border-gray-300 flex flex-col">
       <div class="flex-1">
         <div
           v-for="page in initRoutes"

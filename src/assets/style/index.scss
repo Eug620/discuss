@@ -33,7 +33,7 @@ html {
 }
 
 
-button {
+.login button {
     color: #090909;
     padding: 0.8em 1.4em;
     font-size: 14px;
@@ -45,7 +45,7 @@ button {
     box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
 }
 
-button:active {
+.login button:active {
     color: #666;
     box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
 }
