@@ -10,8 +10,8 @@
                 </template>
 
                 <template v-else>
-  {{item.status ? '已同意' : '已拒绝'}}
-</template>
+                  {{item.status ? '已同意' : '已拒绝'}}
+                </template>
 
             </div>
         </template>
@@ -25,7 +25,15 @@
         <div>
             <h2>我发起的所有申请</h2>
             <div v-for="item in applyListMine" :key="item.id">
-                {{item}}
+                <template v-if="item.room_id">
+                  {{item.user_info.username}} 申请加入房间 {{item.room_info.name}}
+                </template>
+                <template v-else>
+                  {{item.user_info.username}} 申请加 {{item.apply_user_info.username}} 为好友
+                </template>
+
+                <span v-if="item.handle_status">{{item.status ? '已同意' : '已拒绝'}}</span>
+                <span v-else>待处理</span>
             </div>
         </div>
     </div>
