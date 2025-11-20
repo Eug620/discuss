@@ -28,6 +28,21 @@ socketStore.socket?.emit('message', 'world')
 // const handleClose = () => {
 //     visible.value = false
 // }
+
+// fetch('api/user/search?username=a',{
+//     method: 'GET',
+//     headers: {
+//         'Content-Type': 'application/json',
+//         'Authorization': 'Bearer ' + localStorage.getItem('token')
+//     }
+// })
+// fetch('api/room/search?name=a',{
+//     method: 'GET',
+//     headers: {
+//         'Content-Type': 'application/json',
+//         'Authorization': 'Bearer ' + localStorage.getItem('token')
+//     }
+// })
 </script>
 <style lang="scss">
 
