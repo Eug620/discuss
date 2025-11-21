@@ -12,7 +12,7 @@
             </router-link>
 
         </div>
-        <div v-for="friend in userStore.friends" @click="handleFriendClick(friend)" :key="friend.id"
+        <div v-for="friend in friendStore.friends" @click="handleFriendClick(friend)" :key="friend.id"
               class="cursor-pointer p-2">{{ friend.friend_info.username }}</div>
       </div>
       <div class="flex-auto p-2">
@@ -21,10 +21,10 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useUserStore } from "@/store/modules/user";
+import { useFriendStore } from "@/store/modules/friend";
 import router from "@/router";
 
-const userStore = useUserStore();
+const friendStore = useFriendStore();
 
 const handleFriendClick = (friend: any) => {
   router.push({

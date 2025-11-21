@@ -18,7 +18,7 @@
             </router-link>
 
         </div>
-        <div v-for="room in userStore.rooms" @click="handleRoomClick(room)" :key="room.id"
+        <div v-for="room in roomStore.rooms" @click="handleRoomClick(room)" :key="room.id"
               class="cursor-pointer p-2">{{ room.name }}</div>
       </div>
       <div class="flex-auto p-2">
@@ -27,21 +27,12 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useSocketStore } from "@/store/modules/socket";
-import { useUserStore } from "@/store/modules/user";
-import { ref } from "vue";
-import { useRoute } from "vue-router";
+import { useRoomStore } from "@/store/modules/room";
 import router from "@/router";
 // https://heroicons.com/
 // 引入 heroicons 图标
 
-import { Socket } from "socket.io-client";
-import { computed } from "vue";
-
-const socketStore = useSocketStore();
-const userStore = useUserStore();
-const story = ref("");
-const route = useRoute();
+const roomStore = useRoomStore();
 
 const handleRoomClick = (room: any) => {
   router.push({

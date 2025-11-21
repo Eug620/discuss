@@ -1,12 +1,13 @@
 <template lang="">
-    <div class="apply p-2">
-        <!-- apply{{applyList}} -->
-        <template v-if="applyList.length > 0">
-            <div v-for="item in applyList" :key="item.id">
+    <div class="apply p-2 flex flex-col gap-2 h-full">
+      <div>
+        <h2>待处理申请</h2>
+        <template v-if="applyStore.pendingApplies.length > 0">
+            <div v-for="item in applyStore.pendingApplies" :key="item.id">
                 {{item.user_info.username}} 申请加为好友
                 <template v-if="!item.handle_status">
-                    <button @click="handleAccept(item.id)">同意</button>
-                    <button @click="handleReject(item.id)">拒绝</button>
+                    <button @click="applyStore.handleApply(item.id, true)">同意</button>
+                    <button @click="applyStore.handleApply(item.id, false)">拒绝</button>
                 </template>
 
                 <template v-else>
@@ -20,64 +21,30 @@
                 暂无申请
             </div>
         </template>
+      </div>
 
+      <div class="h-1/2">
+          <h2>我发起的所有申请</h2>
+          <div v-for="item in applyStore.applies" :key="item.id">
+              <template v-if="item.room_id">
+                {{item.user_info.username}} 申请加入房间 {{item.room_info.name}}
+              </template>
+              <template v-else>
+                {{item.user_info.username}} 申请加 {{item.apply_user_info.username}} 为好友
+              </template>
 
-        <div>
-            <h2>我发起的所有申请</h2>
-            <div v-for="item in applyListMine" :key="item.id">
-                <template v-if="item.room_id">
-                  {{item.user_info.username}} 申请加入房间 {{item.room_info.name}}
-                </template>
-                <template v-else>
-                  {{item.user_info.username}} 申请加 {{item.apply_user_info.username}} 为好友
-                </template>
-
-                <span v-if="item.handle_status">{{item.status ? '已同意' : '已拒绝'}}</span>
-                <span v-else>待处理</span>
-            </div>
-        </div>
+              <span v-if="item.handle_status">{{item.status ? '已同意' : '已拒绝'}}</span>
+              <span v-else>待处理</span>
+          </div>
+      </div>
     </div>
 </template>
 <script setup lang="ts">
-import serverApi from "@/api";
-import { ref } from "vue";
-import { useUserStore } from "@/store/modules/user";
-const userStore = useUserStore();
+import { useApplyStore } from "@/store/modules/apply";
 
-const applyList = ref([]);
-function getApplyList() {
-  // 待我同意
-  serverApi.GetApplyMine().then((res: any) => {
-    console.log(res.data);
-    applyList.value = res.data;
-  });
-}
-getApplyList();
-
-function handleAccept(id: string) {
-  serverApi.handleApply({ id, status: true }).then((res: any) => {
-    console.log(res.data);
-    getApplyList();
-  });
-}
-
-function handleReject(id: string) {
-  serverApi.handleApply({ id, status: false }).then((res: any) => {
-    console.log(res.data);
-    getApplyList();
-  });
-}
-
-// serverApi.GetMemberInfo({user_id: userStore.userInfo?.id}).then((res:any) => {
-//     console.log(res.data)
-// })
-
-const applyListMine = ref([]);
-// 我发起的所有申请
-serverApi.getApply().then((res: any) => {
-  console.log(res.data);
-  applyListMine.value = res.data;
-});
+const applyStore = useApplyStore();
+applyStore.getPendingApplies()
+applyStore.getApplies()
 </script>
 <style lang="">
 </style>
