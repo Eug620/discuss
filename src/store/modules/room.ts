@@ -12,10 +12,19 @@ export interface Room {
     updatedAt: string
     user_info: User
 }
+
+export interface Rooms {
+    id: string
+    room_id: string
+    room_info: Rooms
+    user_id: string
+    user_info: User
+    createdAt: string
+}
 export const useRoomStore = defineStore('room', {
     state: () => ({
         // 我加入的房间
-        rooms: [] as Room[],
+        rooms: [] as Rooms[],
 
         // 我创建的房间
         roomsMine: [] as Room[],
@@ -23,9 +32,9 @@ export const useRoomStore = defineStore('room', {
     getters: {
         getRoomMap: (state) => {
             return state.rooms.reduce((prev, cur) => {
-                prev[cur.id] = cur
+                prev[cur.room_id] = cur
                 return prev
-            }, {} as Record<string, Room>)
+            }, {} as Record<string, Rooms>)
         },
 
     },
@@ -34,10 +43,6 @@ export const useRoomStore = defineStore('room', {
             ServerApi.GetRoomMine().then((res:any) => {
                 console.log(res)
                 this.roomsMine = res.data.list || []
-
-                // this.rooms.forEach(room => {
-                //     useSocketStore().socket?.emit('join', room.id)
-                // })
             })
             const userinfo = JSON.parse(localStorage.getItem('userInfo') || '{}')
 
@@ -46,7 +51,7 @@ export const useRoomStore = defineStore('room', {
             }).then((res:any) => {
                 this.rooms = res.data || []
                 this.rooms.forEach(room => {
-                    useSocketStore().socket?.emit('join', room.id)
+                    useSocketStore().socket?.emit('join', room.room_id)
                 })
             })
         }

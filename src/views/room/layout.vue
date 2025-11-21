@@ -19,7 +19,7 @@
 
         </div>
         <div v-for="room in roomStore.rooms" @click="handleRoomClick(room)" :key="room.id"
-              class="cursor-pointer p-2">{{ room.room_info.name }}</div>
+              class="cursor-pointer p-2">{{ room.room_info.name }} </div>
       </div>
       <div class="flex-auto p-2">
           <router-view></router-view>
@@ -38,7 +38,7 @@ const handleRoomClick = (room: any) => {
   router.push({
     name: "room-message",
     params: {
-      id: room.id,
+      id: room.room_id,
     },
   });
 };
