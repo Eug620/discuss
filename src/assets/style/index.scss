@@ -87,6 +87,15 @@ html {
 }
 
 
+textarea:focus {
+    border-color: none; /* 聚焦时边框颜色 */
+    outline: none; /* 移除默认轮廓线 */
+}
+textarea {
+    resize: none;
+}
+
+
 // .switch-holder {
 //     display: flex;
 //     padding: 10px 20px;

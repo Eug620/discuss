@@ -2,7 +2,7 @@
  * @Author       : Eug yyh3531@163.com
  * @Date         : 2025-11-23 20:37:33
  * @LastEditors  : Eug yyh3531@163.com
- * @LastEditTime : 2025-11-23 23:25:30
+ * @LastEditTime : 2025-11-23 23:36:26
  * @FilePath     : \e-talk\src\views\friend\index.vue
  * @Description  : filename
  * 
@@ -12,7 +12,7 @@
     <div class="w-full h-full flex flex-col gap-4">
         <div class="w-full h-full p-4">
             <!-- {{user}} -->
-           <div v-for="message in getHistory" :key="message.id" class="w-full h-auto p-2 border-b border-gray-300" :style="{
+           <div v-for="message in getHistory" :key="message.id" class="w-full h-auto p-2" :style="{
             textAlign: message.sender === route.params.id ? 'left' : 'right',
            }">
             <!-- 发送人：
@@ -29,7 +29,7 @@
            </div>
         </div>
         <div class="w-full h-100 border-t border-gray-300 p-4 relative">
-            <textarea id="story" name="story" placeholder="Type your message..." v-model.trim="story" rows="5" cols="33" class="w-full h-full textarea ">
+            <textarea id="story" name="story" placeholder="Type your message..." v-model.trim="story" rows="5" cols="33" class="w-full h-full  ">
             </textarea>
             <button class="absolute bottom-12 right-12 cursor-pointer" @click="handleSend">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">

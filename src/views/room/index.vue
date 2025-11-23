@@ -18,7 +18,7 @@
         </div>
 
         <div class="w-full h-full p-4">
-                <div v-for="message in getHistory" :key="message.id" class="w-full h-auto p-2 border-b border-gray-300" :style="{
+                <div v-for="message in getHistory" :key="message.id" class="w-full h-auto p-2" :style="{
             textAlign: message.sender === userStore.userInfo.id ? 'right' : 'left',
            }">
             <div class="flex">
@@ -36,7 +36,7 @@
            </div>
         </div>
         <div class="w-full h-100 border-t border-gray-300 p-4 relative">
-            <textarea id="story" name="story" placeholder="Type your message..." v-model.trim="story" rows="5" cols="33" class="w-full h-full textarea ">
+            <textarea id="story" name="story" placeholder="Type your message..." v-model.trim="story" rows="5" cols="33" class="w-full h-full ">
             </textarea>
             <button class="absolute bottom-12 right-12 cursor-pointer" @click="handleSend">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
