@@ -1,20 +1,26 @@
 <template>
   <div class="w-full h-full flex">
-    <div class="w-[120px] border-r border-gray-300 flex flex-col">
+    <div class="w-[80px] flex flex-col shadow-md">
       <div class="flex-1">
         <div
           v-for="page in initRoutes"
           @click="handleClick(page)"
           :key="page.path"
           class="cursor-pointer text-center p-2"
-        >{{ page.meta.title }}</div>
+        >
+        <div class="w-6 py-1 mx-auto"  v-html="page.meta.icon"></div>
+      </div>
       </div>
       <div class="">
         <div
           class="cursor-pointer text-center p-2"
           @click="handleLogout"
         >
-          退出
+        <div class="w-6 py-1 mx-auto " >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+          </svg>
+        </div>
         </div>
       </div>
     </div>

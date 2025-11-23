@@ -1,6 +1,16 @@
+<!--
+ * @Author       : Eug yyh3531@163.com
+ * @Date         : 2025-11-23 20:37:33
+ * @LastEditors  : Eug yyh3531@163.com
+ * @LastEditTime : 2025-11-23 21:15:50
+ * @FilePath     : \e-talk\src\views\friend\layout.vue
+ * @Description  : filename
+ * 
+ * Copyright (c) 2025 by ${git_name_email}, All Rights Reserved. 
+-->
 <template lang="">
   <div class="w-full h-full flex">
-      <div class="w-[240px] border-r border-gray-300">
+      <div class="w-[240px] shadow-md">
         <div class="flex justify-center items-center gap-2 p-2 text-xs">
 
             <input type="text" placeholder="Enter username" v-model="username" class="w-full rounded-md p-2 h-8 border border-gray-300 flex justify-center items-center"/>
