@@ -1,16 +1,6 @@
 <template lang="">
-    <div class="dashboard p-2">
-        <h1>
-            Welcome !
-            <!-- <button @click="handleClick">点击</button>
-            <Dialog v-model:value="visible">
-                <template #default>
-                    <div style="text-align: center;width: 200px; height: 100px;">
-                        <h2 @click="handleClose">确认退出吗？</h2>
-                    </div>
-                </template>
-            </Dialog> -->
-        </h1>
+    <div class="dashboard p-2 flex flex-col items-center justify-center h-full text-2xl">
+        Welcome !
     </div>
 </template>
 <script setup lang="ts">

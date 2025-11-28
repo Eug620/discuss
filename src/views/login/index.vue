@@ -1,6 +1,6 @@
 <template lang="">
     <div class="login w-full h-full ">
-        <div class="fixed top-1/2 w-[400px] h-[480px] bg-white left-1/2 -translate-x-1/2 flex flex-col gap-8 -translate-y-1/2  px-10 py-10 rounded-md neumorphism-up ">
+        <div class="fixed top-1/2 w-[400px] h-[480px] bg-gray-100 left-1/2 -translate-x-1/2 flex flex-col gap-8 -translate-y-1/2  px-10 py-10 rounded-md ">
             <div class="login-toggle">
                 <input type="checkbox" v-model="activeTab" id="bluetooth">
                 <label for="bluetooth"></label>

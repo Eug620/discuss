@@ -36,16 +36,16 @@
 
       <div class="flex-1">
           <div class="border-b border-gray-300 text-center py-2">我发起的所有申请</div>
-          <div v-for="item in applyStore.applies" :key="item.id" class="flex justify-around py-2">
-              <div v-if="item.room_id">
+          <div v-for="item in applyStore.applies" :key="item.id" class="flex gap-10 py-2">
+              <div v-if="item.room_id" class="flex-1 text-right">
                 申请加入房间 {{item.room_info.name}}
               </div>
-              <div v-else>
+              <div v-else class="flex-1 text-right">
                 申请加 {{item.apply_user_info.username}} 为好友
               </div>
 
-              <span v-if="item.handle_status">{{item.status ? '已同意' : '已拒绝'}}</span>
-              <span v-else>待处理</span>
+              <span v-if="item.handle_status" class="flex-1 text-left">{{item.status ? '已同意' : '已拒绝'}}</span>
+              <span v-else class="flex-1 text-left">待处理</span>
           </div>
       </div>
     </div>
