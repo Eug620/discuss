@@ -24,13 +24,13 @@ export const useUserStore = defineStore('user', {
         getToken: (state) => state.token,
     },
     actions: {
-        login(data: any) {
+        async login(data: any) {
             this.isLogin = true;
             this.token = data.access_token
             this.userInfo = data
             localStorage.setItem('token', data.access_token)
             localStorage.setItem('userInfo', JSON.stringify(data))
-            useSocketStore().initSocket()
+            await useSocketStore().initSocket()
             useFriendStore().getFriends()
             useRoomStore().getRooms()
         },
@@ -45,11 +45,11 @@ export const useUserStore = defineStore('user', {
                 name: 'login',
             })
         },
-        init() {
+        async init() {
             this.token = localStorage.getItem('token') || ''
             this.userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}')
             this.isLogin = this.token !== ''
-            this.isLogin && (useSocketStore().initSocket())
+            this.isLogin && (await useSocketStore().initSocket())
             this.isLogin && (useFriendStore().getFriends())
             this.isLogin && (useRoomStore().getRooms())
         },
