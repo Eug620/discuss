@@ -13,7 +13,7 @@ export const useSocketStore = defineStore('socket', {
     }),
     actions: {
         initSocket() {
-            this.socket = io('http://localhost:3001', {
+            this.socket = io(import.meta.env.VITE_APP_WS_BASE_URL, {
                 path: '/websocket',
                 transports: ['websocket'],
                 auth: {
