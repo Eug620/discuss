@@ -10,6 +10,8 @@ export const useSocketStore = defineStore('socket', {
         roomMessageMap: new Map<string, any[]>(),
         // 房间id - 房间成员
         roomMemberMap: new Map<string, any[]>(),
+        // 房间id - 房间在线成员id
+        roomMemberOnlineMap: new Map<string, Set<string>>(),
     }),
     actions: {
         initSocket() {
@@ -57,6 +59,10 @@ export const useSocketStore = defineStore('socket', {
                     const messages = this.roomMessageMap.get(data.room) || []
                     messages.push(data)
                     this.roomMessageMap.set(data.room, messages)
+                })
+
+                this.socket.on('online', (data) => {
+                    this.roomMemberOnlineMap.set(data.room, new Set(data.users || []))
                 })
             })
             

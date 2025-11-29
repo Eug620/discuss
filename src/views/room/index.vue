@@ -53,7 +53,7 @@
         <div v-for="member in getMember" :key="member.user_id" class="text-sm" :class="{
           'text-rose-400': member.user_id === userStore.userInfo.id,
         }">
-          {{member.user_info.username}}
+          {{member.user_info.username}} | {{getMemberOnline.has(member.user_id) ? '在线' : '离线'}}
         </div>
       </div>
     </div>
@@ -82,13 +82,17 @@ const getHistory = computed(() => {
 const getMember = computed(() => {
   return socketStore.roomMemberMap.get(route.params.id as string) || [];
 });
+// 获取房间成员在线状态
+const getMemberOnline = computed(() => {
+  return socketStore.roomMemberOnlineMap.get(route.params.id as string) || new Set();
+});
 // 获取用户信息
 const getUserInfo = (user_id: string) => {
   return getMember.value.find((item: any) => item.user_id === user_id)?.user_info?.username;
 }
 // 获取房间信息
 const getRoomInfo = computed(() => {
-  return roomStore.getRoomMap[route.params.id as string].room_info || {}
+  return roomStore.getRoomMap[route.params.id as string]?.room_info || {}
 })
 
 
