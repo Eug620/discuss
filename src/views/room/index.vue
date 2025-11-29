@@ -50,10 +50,11 @@
       </div>
       <div class="w-[200px] h-full border-l border-gray-300 flex flex-col gap-2 p-2">
         <div class="border-b border-gray-300 pb-2">群成员</div>
-        <div v-for="member in getMember" :key="member.user_id" class="text-sm" :class="{
+        <div v-for="member in getMember" :key="member.user_id" class="text-sm flex justify-between items-center" :class="{
           'text-rose-400': member.user_id === userStore.userInfo.id,
         }">
-          {{member.user_info.username}} | {{getMemberOnline.has(member.user_id) ? '在线' : '离线'}}
+          <span>{{member.user_info.username}}</span>
+          <span>{{getMemberOnline.has(member.user_id) ? '在线' : '离线'}}</span>
         </div>
       </div>
     </div>
