@@ -71,7 +71,7 @@ const getHistory = computed(() => {
 });
 
 const getFriendInfo = computed(() => {
-  return friendStore.getFriendMap[route.params.id as string].friend_info || {}
+  return friendStore.getFriendMap[route.params.id as string]?.friend_info || {}
 })
 
 

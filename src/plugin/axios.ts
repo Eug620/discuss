@@ -58,7 +58,7 @@ interface RequestConfig extends AxiosRequestConfig {
 interface RuquestService extends AxiosInstance {
     (config: RequestConfig): AxiosPromise;
 }
-console.log(import.meta.env, ' import.meta.env.VITE_APP_BASE_API');
+// console.log(import.meta.env, ' import.meta.env.VITE_APP_BASE_API');
 // 创建一个 axios 实例
 const service: RuquestService = axios.create({
     // withCredentials: true,

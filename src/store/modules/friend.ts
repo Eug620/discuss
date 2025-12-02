@@ -25,8 +25,7 @@ export const useFriendStore = defineStore('friend', {
     },
     actions: {
         getFriends() {
-            ServerApi.GetFriends().then(res => {
-                console.log(res)
+            ServerApi.GetFriends().then((res:any) => {
                 this.friends = res.data
             })
         },

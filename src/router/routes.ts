@@ -178,7 +178,7 @@ export const frameIn: any[] = [
     {
         path: '/',
         redirect: { name: 'dashboard' },
-        component: () => import('@/layout/_index.vue'),
+        component: () => import('@/layout/index.vue'),
         children: [
             ...initRoutes,
         ]

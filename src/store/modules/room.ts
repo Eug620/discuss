@@ -41,7 +41,6 @@ export const useRoomStore = defineStore('room', {
     actions: {
         getRooms() {
             ServerApi.GetRoomMine().then((res:any) => {
-                console.log(res)
                 this.roomsMine = res.data.list || []
             })
             const userinfo = JSON.parse(localStorage.getItem('userInfo') || '{}')

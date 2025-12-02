@@ -45,20 +45,17 @@ export const useApplyStore = defineStore('apply', {
     actions: {
         getApplies() {
             serverApi.getApply().then((res: any) => {
-                console.log(res)
                 this.applies = res.data
             })
         },
         getPendingApplies() {
             serverApi.GetApplyMine().then((res: any) => {
-                console.log(res)
                 this.pendingApplies = res.data
             })
         },
         // 处理申请
         handleApply(id: string, status: boolean) {
             serverApi.handleApply({ id, status }).then((res: any) => {
-                console.log(res)
                 // 处理成功后，刷新待审核申请列表
                 this.getPendingApplies()
                 // 处理成功后，刷新房间列表和好友列表

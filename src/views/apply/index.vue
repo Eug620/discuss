@@ -3,7 +3,7 @@
       <div class="flex-1">
         <div class="border-b border-gray-300 text-center py-2">待处理申请</div>
         <div v-if="applyStore.pendingApplies.length > 0">
-            <div v-for="item in applyStore.pendingApplies" :key="item.id" class="flex justify-around py-2">
+            <div v-for="item in applyStore.pendingApplies" :key="item.id" class="flex justify-around py-2 hover:bg-gray-300">
                 <div>{{item.user_info.username}} 申请加为好友</div>
                 <div v-if="!item.handle_status" class="flex gap-4">
                     <!-- 同意 -->
@@ -36,7 +36,7 @@
 
       <div class="flex-1">
           <div class="border-b border-gray-300 text-center py-2">我发起的所有申请</div>
-          <div v-for="item in applyStore.applies" :key="item.id" class="flex gap-10 py-2">
+          <div v-for="item in applyStore.applies" :key="item.id" class="flex gap-10 py-2 hover:bg-gray-300">
               <div v-if="item.room_id" class="flex-1 text-right">
                 申请加入房间 {{item.room_info.name}}
               </div>
