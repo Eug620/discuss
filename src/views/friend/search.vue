@@ -19,7 +19,7 @@
             <div v-for="item in result" :key="item.id" class="cursor-pointer p-2 flex justify-around">
                 <span>{{ item.username }}</span>
 
-                <button v-if="!friendStore.getFriendMap[item.id]" @click="handleJoin(item.id)">
+                <button v-if="!friendStore.getFriendMap[item.id] && item.id !== userStore.userInfo.id" @click="handleJoin(item.id)">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -36,11 +36,13 @@ import { ref } from "vue";
 import ServerApi from "@/api";
 import { User } from "@/store/modules/user";
 import { useFriendStore } from "@/store/modules/friend";
+import { useUserStore } from "@/store/modules/user";
 
 
 const username = ref('')
 const result = ref<User[]>([]);
 const friendStore = useFriendStore()
+const userStore = useUserStore()
 
 const handleSearch = () => {
     ServerApi.SearchUser(username.value).then((res: any) => {
