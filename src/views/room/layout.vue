@@ -3,7 +3,7 @@
       <div class="w-[240px] shadow-md animate__fadeIn animate__animated">
         <div class="flex justify-center items-center gap-2 p-2 text-xs">
 
-            <input type="text" placeholder="Enter room name" v-model="roomName" class="w-full rounded-md p-2 h-8 border border-gray-300 flex justify-center items-center"/>
+            <input type="text" placeholder="Enter room name" v-model="roomName" class="w-full rounded-md p-2 h-8 border border-gray-300 flex justify-center items-center focus:outline-none"/>
 
             <router-link to="/room/search">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">

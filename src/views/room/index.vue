@@ -24,11 +24,29 @@
                 <div v-for="message in getHistory" :key="message.id" class="w-full h-auto p-2" :style="{
             textAlign: message.sender === userStore.userInfo.id ? 'right' : 'left',
            }">
-            <div class="flex">
+            <div class="flex mb-1">
                 <div class="px-2" v-if="message.sender !== userStore.userInfo.id" >
                   [{{getUserInfo(message.sender)}}]
                 </div>
-                <div class=flex-1> {{ message.content }} </div>
+                <div class="flex-1"> 
+                  <div class="inline-block border border-gray-300 p-2 py-1 rounded-md relative">
+                    <span>
+                      {{ message.content }}
+                    </span>
+
+                    <div v-if="message.sender === route.params.id" class="absolute top-2 -left-2 w-0 h-0 
+                      border-t-8 border-t-transparent
+                      border-r-8 border-r-gray-300
+                      border-b-8 border-b-transparent">
+                    </div>
+
+                    <div v-else class="absolute top-2 -right-2 w-0 h-0 
+                      border-t-8 border-t-transparent
+                      border-l-8 border-l-gray-300
+                      border-b-8 border-b-transparent">
+                    </div>
+                  </div>
+                </div>
                 <div class="px-2" v-if="message.sender === userStore.userInfo.id" >
                   [{{ userStore.userInfo.username}}]
                 </div>

@@ -16,7 +16,7 @@
         placeholder="Enter room name"
         @keyup.enter="handleSearch"
         v-model.trim="roomName"
-        class="w-[200px] rounded-md p-2 h-8 border border-gray-300 flex justify-center items-center"
+        class="w-[200px] rounded-md p-2 h-8 border border-gray-300 flex justify-center items-center focus:outline-none"
       />
     </div>
 
