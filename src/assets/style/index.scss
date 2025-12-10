@@ -1,9 +1,9 @@
 @font-face {
-  font-family: "AlimamaFangYuanTiVF";
-  src: url("//cdn.jsdelivr.net/gh/eug620/Pics@master/micro-vue/AlimamaFangYuanTiVF-Thin.woff2") format("woff2"),
-  url("//cdn.jsdelivr.net/gh/eug620/Pics@master/micro-vue/AlimamaFangYuanTiVF-Thin.woff") format("woff"),
-  url("//cdn.jsdelivr.net/gh/eug620/Pics@master/micro-vue/AlimamaFangYuanTiVF-Thin.ttf") format("ttf");
-  font-display: swap;
+    font-family: "AlimamaFangYuanTiVF";
+    src: url("//cdn.jsdelivr.net/gh/eug620/Pics@master/micro-vue/AlimamaFangYuanTiVF-Thin.woff2") format("woff2"),
+        url("//cdn.jsdelivr.net/gh/eug620/Pics@master/micro-vue/AlimamaFangYuanTiVF-Thin.woff") format("woff"),
+        url("//cdn.jsdelivr.net/gh/eug620/Pics@master/micro-vue/AlimamaFangYuanTiVF-Thin.ttf") format("ttf");
+    font-display: swap;
 }
 
 html {
@@ -88,9 +88,12 @@ html {
 
 
 textarea:focus {
-    border-color: none; /* 聚焦时边框颜色 */
-    outline: none; /* 移除默认轮廓线 */
+    border-color: none;
+    /* 聚焦时边框颜色 */
+    outline: none;
+    /* 移除默认轮廓线 */
 }
+
 textarea {
     resize: none;
 }
@@ -164,6 +167,26 @@ textarea {
         3px 3px 5px #00b33c;
 }
 
- #nprogress .bar {
+#nprogress .bar {
     background: oklch(87.2% 0.01 258.338);
+}
+
+/**
+ * 滚动条样式
+ */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
 }
