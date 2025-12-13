@@ -12,7 +12,7 @@
   <div class="w-full h-full flex gap-4 ">
     <div class="w-full h-full flex flex-col gap-4">
         <div class="w-full text-center border-b border-gray-300 pb-2 relative">
-            <div :class="[getFriendStatus ? 'text-green-600' : 'text-gray-600']">
+            <div :class="[]">
               {{ getFriendInfo.username }} 
             </div>
         </div>
@@ -62,7 +62,10 @@
     </div>
     <div class="w-[200px] h-full border-l border-gray-300 flex flex-col gap-2 p-2 pt-0">
       <div class="border-b border-gray-300 pb-2">用户信息</div>
-      <div class="text-sm" >{{ getFriendInfo.username }}</div>
+      <div class="text-sm  flex justify-between" >
+        <span>{{ getFriendInfo.username }}</span>
+        <span>{{ getFriendStatus ? '在线' : '离线' }}</span>
+      </div>
       <div class="text-sm" >{{ getFriendInfo.email }}</div>
       <div class="text-sm" >{{ new Date(getFriendInfo.createdAt).toLocaleString() }}</div>
     </div>
