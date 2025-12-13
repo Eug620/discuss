@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { io, Socket } from 'socket.io-client'
 import { useUserStore } from './user'
+import { useFriendStore } from './friend'
 export const useSocketStore = defineStore('socket', {
     state: () => ({
         socket: null as Socket | null,
@@ -63,6 +64,18 @@ export const useSocketStore = defineStore('socket', {
 
                 this.socket.on('online', (data) => {
                     this.roomMemberOnlineMap.set(data.room, new Set(data.users || []))
+                })
+
+                // 接收好友状态更新
+                this.socket.on('status', (data) => {
+                    useFriendStore().setFriendStatus(data.friend, data.status)
+                })
+
+                // 初始化获取所有在线好友
+                this.socket.on('onlineFriends', (data) => {
+                    data.users.forEach((id:string) => {
+                        useFriendStore().setFriendStatus(id, true)
+                    })
                 })
             })
             

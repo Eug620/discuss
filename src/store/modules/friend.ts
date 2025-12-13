@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { User } from './user'
 import ServerApi from '@/api/index'
+import { set } from 'nprogress'
 
 interface Friend {
     createdAt: string
@@ -9,6 +10,7 @@ interface Friend {
     friend_info: User
     id: string
     user_info: User
+    status?: boolean
 }
 export const useFriendStore = defineStore('friend', {
     state: () => ({
@@ -25,9 +27,16 @@ export const useFriendStore = defineStore('friend', {
     },
     actions: {
         getFriends() {
-            ServerApi.GetFriends().then((res:any) => {
-                this.friends = res.data
+            return new Promise((resolve, reject) => {
+                ServerApi.GetFriends().then((res:any) => {
+                    this.friends = res.data
+                    resolve(res.data)
+                })
             })
         },
+        setFriendStatus(id: string, status: boolean) {
+            const friend = this.getFriendMap[id]
+            if (friend) friend.status = status
+        }
     }
 })

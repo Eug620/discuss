@@ -12,8 +12,8 @@
   <div class="w-full h-full flex gap-4 ">
     <div class="w-full h-full flex flex-col gap-4">
         <div class="w-full text-center border-b border-gray-300 pb-2 relative">
-            <div class="">
-              {{ getFriendInfo.username }}
+            <div :class="[getFriendStatus ? 'text-green-600' : 'text-gray-600']">
+              {{ getFriendInfo.username }} 
             </div>
         </div>
         <div class="w-full h-full p-4 flex-1 overflow-y-auto">
@@ -88,6 +88,10 @@ const getHistory = computed(() => {
 
 const getFriendInfo = computed(() => {
   return friendStore.getFriendMap[route.params.id as string]?.friend_info || {}
+})
+
+const getFriendStatus = computed(() => {
+  return friendStore.getFriendMap[route.params.id as string]?.status || false
 })
 
 
