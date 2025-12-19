@@ -17,7 +17,8 @@
       </div>
       <div class="flex-1">
         <div class="inline-block border border-gray-300 p-2 py-1 rounded-md relative text-sm">
-          <span>
+          <img v-if="message.type === 'image'" :src="message.content" alt="" class="h-24 rounded-md">
+          <span v-else>
             {{ message.content }}
           </span>
 
@@ -54,6 +55,11 @@
         d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
     </svg>
   </button>
+  <button class="absolute bottom-12 right-24 cursor-pointer" @click="handleSendImage">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+    </svg>
+  </button>
 </div>
 </div>
 <div class="w-[200px] h-full border-l border-gray-300 flex flex-col gap-2 p-2 pt-0">
@@ -80,6 +86,8 @@
 </div>
 </div>
 </div>
+<input class="hidden" id="chooseImage" type="file" accept="image/*">
+
 </div>
 </template>
 <script setup lang="ts">
@@ -89,7 +97,7 @@ import { useRoomStore } from "@/store/modules/room";
 import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { Socket } from "socket.io-client";
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import ServerApi from "@/api";
 
 const socketStore = useSocketStore();
@@ -161,6 +169,25 @@ const handleSend = () => {
   });
   story.value = "";
 };
+
+const handleSendImage = () => {
+  document.getElementById("chooseImage")?.click();
+};
+onMounted(() => {
+  document.getElementById("chooseImage")?.addEventListener("change", (e) => {
+    const file = (e.target as HTMLInputElement).files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      (socketStore.socket as Socket).emit("room", {
+        room: route.params.id,
+        content: reader.result as string,
+        type: "image",
+      });
+    };
+  });
+});
 </script>
 <style lang="">
 </style>
