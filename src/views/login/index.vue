@@ -7,8 +7,8 @@
             </div>
 
             <input type="text" class="input" placeholder="用户名" v-model.trim="loginForm.username">
-            <input type="password" class="input" placeholder="密码" v-model.trim="loginForm.password">
-            <input type="text" class="input" placeholder="邮箱" v-if="activeTab" v-model.trim="loginForm.email">
+            <input type="password" class="input" placeholder="密码" @keydown.enter="handleLogin" v-model.trim="loginForm.password">
+            <input type="text" class="input" placeholder="邮箱" @keydown.enter="handleLogin" v-if="activeTab" v-model.trim="loginForm.email">
             <button type="submit" @click="handleLogin">提交</button>
         </div>
     </div>
@@ -32,6 +32,9 @@ const loginForm = reactive({
 
 const handleLogin = () => {
     if (!loginForm.username || !loginForm.password) {
+        return
+    }
+    if (activeTab.value && !loginForm.email) {
         return
     }
     serverApi[activeTab.value ? 'Register' : 'Login'](loginForm).then((res: any) => {
