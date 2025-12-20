@@ -29,7 +29,7 @@
             <div class="mb-1 ">
               <div class="inline-block border border-gray-300 p-2 py-1 rounded-md relative">
                 <img v-if="message.type === 'image'" :src="message.content" alt="" @click="handlePreviewImage(message.content)" class="h-24 rounded-md">
-                <span v-else>
+                <span v-else class="whitespace-pre-wrap">
                   {{ message.content }}
                 </span>
 
