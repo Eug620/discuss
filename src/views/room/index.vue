@@ -10,8 +10,11 @@
           <div class="w-full h-full p-4">
               <div v-for="message in getHistory" :key="message.id" class="w-full h-auto p-2"
                   :style="{ textAlign: message.sender === userStore.userInfo.id ? 'right' : 'left', }">
-                  <div class="flex mb-1 items-center ">
-                      <div class="px-2 text-sm" v-if="message.sender !== userStore.userInfo.id">
+                  <div class="text-xs text-gray-700">
+                      {{ new Date(message.timestamp).toLocaleString() }}
+                  </div>
+                  <div class="flex mb-1 items-start">
+                      <div class="px-2 text-sm py-1" v-if="message.sender !== userStore.userInfo.id">
                           [{{ getUserInfo(message.sender) }}]
                       </div>
                       <div class="flex-1">
@@ -29,13 +32,11 @@
                               </div>
                           </div>
                       </div>
-                      <div class="px-2 text-sm" v-if="message.sender === userStore.userInfo.id">
+                      <div class="px-2 text-sm py-1" v-if="message.sender === userStore.userInfo.id">
                           [{{ userStore.userInfo.username }}]
                       </div>
                   </div>
-                  <div class="text-xs text-gray-700">
-                      {{ new Date(message.timestamp).toLocaleString() }}
-                  </div>
+                  
               </div>
           </div>
           <div class="w-full h-100 border-t border-gray-300 p-4 relative">
