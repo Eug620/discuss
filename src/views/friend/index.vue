@@ -22,7 +22,7 @@
            }">
             <div class="mb-1 ">
               <div class="text-xs text-gray-700" >
-                {{ new Date(message.timestamp).toLocaleString() }}
+                {{ dayjs(message.timestamp).fromNow() }}
               </div>
               <div class="inline-block border border-gray-300 p-2 py-1 rounded-md relative">
                 <img v-if="message.type === 'image'" :src="message.content" alt="" @click="handlePreviewImage(message.content)" class="h-24 rounded-md">
@@ -81,6 +81,7 @@ import { useFriendStore } from "@/store/modules/friend";
 import { computed, onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import { Socket } from "socket.io-client";
+import dayjs from "@/plugin/dayjs";
 
 const socketStore = useSocketStore();
 const friendStore = useFriendStore();

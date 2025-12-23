@@ -11,7 +11,7 @@
               <div v-for="message in getHistory" :key="message.id" class="w-full h-auto p-2"
                   :style="{ textAlign: message.sender === userStore.userInfo.id ? 'right' : 'left', }">
                   <div class="text-xs text-gray-700">
-                      {{ new Date(message.timestamp).toLocaleString() }}
+                      {{ dayjs(message.timestamp).fromNow() }}
                   </div>
                   <div class="flex mb-1 items-start">
                       <div class="px-2 text-sm py-1 border border-transparent" v-if="message.sender !== userStore.userInfo.id">
@@ -95,6 +95,7 @@ import { useRoute } from "vue-router";
 import { Socket } from "socket.io-client";
 import { computed, onMounted } from "vue";
 import ServerApi from "@/api";
+import dayjs from "@/plugin/dayjs";
 
 const socketStore = useSocketStore();
 const userStore = useUserStore();

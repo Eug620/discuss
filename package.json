@@ -12,6 +12,7 @@
     "@opentiny/vue": "^3.27.0",
     "@tailwindcss/vite": "^4.1.17",
     "axios": "^1.13.2",
+    "dayjs": "^1.11.19",
     "js-cookie": "^3.0.5",
     "lodash-es": "^4.17.21",
     "nprogress": "^0.2.0",
