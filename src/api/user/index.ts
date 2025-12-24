@@ -16,6 +16,7 @@ const Url:any = {
         'login': '/user/login',
         'register': '/user',
         'userSearch': '/user/search',
+        'userUpload': '/user/upload',
 
 
     }
@@ -57,6 +58,16 @@ export default {
         return request({
             url: `${Url[requestServerName].userSearch}?username=${name}`,
             method: 'get'
+        })
+    },
+    UploadUser(data?:any) {
+        return request({
+            url: Url[requestServerName].userUpload,
+            method: 'post',
+            data,
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
         })
     },
 

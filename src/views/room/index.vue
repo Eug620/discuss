@@ -19,7 +19,7 @@
                       </div>
                       <div class="flex-1">
                           <div class="inline-block border border-gray-300 p-2 py-1 rounded-md relative text-sm">
-                              <img v-if="message.type === 'image'" :src="message.content" alt=""
+                              <img v-if="message.type === 'image'" :src="`${VITE_APP_API_FILE_URL}${message.content}`" alt=""
                                   @click="handlePreviewImage(message.content)" class="h-24 rounded-md">
                               <span v-else class="whitespace-pre-wrap">
                                   {{ message.content }}
@@ -96,6 +96,9 @@ import { Socket } from "socket.io-client";
 import { computed, onMounted } from "vue";
 import ServerApi from "@/api";
 import dayjs from "@/plugin/dayjs";
+import serverApi from "@/api";
+
+const VITE_APP_API_FILE_URL = import.meta.env.VITE_APP_API_FILE_URL
 
 const socketStore = useSocketStore();
 const userStore = useUserStore();
@@ -176,26 +179,22 @@ onMounted(() => {
   document.getElementById("chooseImage")?.addEventListener("change", (e) => {
     const file = (e.target as HTMLInputElement).files?.[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      (socketStore.socket as Socket).emit("room", {
-        room: route.params.id,
-        content: reader.result as string,
-        type: "image",
-      });
-    };
+    const formData = new FormData()
+    formData.append('file', file as Blob)
+    serverApi.UploadUser(formData).then((res:any) => {
+      if (res.code === 200) {
+        (socketStore.socket as Socket).emit('room', {
+          room: route.params.id,
+          content: res.data.filename,
+          type: 'image'
+        })
+      }
+    })
   });
 });
 
 const handlePreviewImage = (url: string) => {
-  const win = window.open();
-  win?.document.write(
-    `<img src="${url}" style="max-width: 100%; height: auto;">`
-  );
-  win?.document.write(
-    `<style rel="stylesheet" >*{margin: 0; padding: 0; text-align: center;}</style>`
-  );
+  window.open(`${VITE_APP_API_FILE_URL}${url}`);
 };
 </script>
 <style lang="">
