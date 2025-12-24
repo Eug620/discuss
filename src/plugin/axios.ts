@@ -2,7 +2,6 @@
 import axios, { AxiosInstance, AxiosPromise, AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios'
 import { APIENUM, API_ENUM_SERVICE } from '@/settings'
 import { useUserStore } from '@/store/modules/user'
-// import { Notification } from '@arco-design/web-vue'
 import Cookies from 'js-cookie'
 import { pinia } from '@/store'
 
@@ -15,17 +14,8 @@ function errorCreate(msg: any, path: any) {
 
 // 记录和显示错误
 function errorLog(error: Error, path?: any) {
-    // 添加到日志
-    // store.dispatch('d2admin/log/push', {
-    //   message: '数据请求异常',
-    //   type: 'danger',
-    //   meta: {
-    //     error
-    //   }
-    // })
     // 打印到控制台
     if (import.meta.env.MODE === 'development') {
-        // util.log.danger('>>>>>> Error >>>>>>')
         console.log(error)
     }
     let errorMsg = error.message
@@ -35,22 +25,13 @@ function errorLog(error: Error, path?: any) {
     }
 
     // 显示提示
-    //   Notification.error({
-    //     content: errorMsg,
-    //     title: path || 'Error',
-    //     duration: 5 * 1000
-    //   })
+    console.log(errorMsg, path || 'Error')
     /// 如果是401那就去登录 并且不能是mock
     if (error.message.includes('401') && import.meta.env.VITE_APP_BUILD_MODE !== 'true') {
-        // setTimeout(() => {
-        //   store.dispatch('d2admin/account/logout')
-        // }, 2500)
         useUserStore(pinia).logout()
         console.log('logout');
-
     }
 }
-// console.log( import.meta.env.VITE_APP_BASE_API, ' import.meta.env.VITE_APP_API');
 interface RequestConfig extends AxiosRequestConfig {
     service?: APIENUM
     headers?: any
@@ -58,7 +39,6 @@ interface RequestConfig extends AxiosRequestConfig {
 interface RuquestService extends AxiosInstance {
     (config: RequestConfig): AxiosPromise;
 }
-// console.log(import.meta.env, ' import.meta.env.VITE_APP_BASE_API');
 // 创建一个 axios 实例
 const service: RuquestService = axios.create({
     // withCredentials: true,
@@ -81,7 +61,6 @@ service.interceptors.request.use(
         if (customConfig.service) {
             customConfig.baseURL = API_ENUM_SERVICE[customConfig.service]
         }
-        // store.dispatch('d2admin/tags/toggle', true)
         // 在请求发送之前做一些处理
         // 让每个请求携带token-- ['X-Token']为自定义key 请根据实际情况自行修改
         customConfig.headers['Base-Version'] = import.meta.env.VITE_APP_VERSION
@@ -93,13 +72,10 @@ service.interceptors.request.use(
             customConfig.headers['Authorization'] = `Bearer ${useUserStore().getToken}`
         }
 
-
-        // loading.show(config)
         return customConfig
     },
     error => {
         // 发送失败
-        // store.dispatch('d2admin/tags/toggle', true)
         console.log(error)
         return Promise.reject(error)
     }
@@ -108,8 +84,6 @@ service.interceptors.request.use(
 // 响应拦截器
 service.interceptors.response.use(
     response => {
-        // store.dispatch('d2admin/tags/toggle', false)
-        // loading.hide(response.config)
         // dataAxios 是 axios 返回数据中的 data
         const dataAxios: any = response.data
         // 这个状态码是和后端约定的
@@ -118,7 +92,7 @@ service.interceptors.response.use(
 
         // 根据 code 进行判断
         if (code === undefined) {
-            // 如果没有 code 代表这不是项目后端开发的接口 比如可能是 D2Admin 请求最新版本
+            // 如果没有 code 代表这不是项目后端开发的接口 
             return dataAxios
         } else {
             // 有 code 代表这是一个后端接口 可以进行进一步的判断
@@ -149,7 +123,6 @@ service.interceptors.response.use(
         }
     },
     error => {
-        // store.dispatch('d2admin/tags/toggle', false)
         if (error && error.response) {
             switch (error.response.status) {
                 case 400: error.message = `[ code: 400 ] server error 请求错误 ${error.response.data.msg || ''}`; break
