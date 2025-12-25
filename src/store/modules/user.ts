@@ -6,11 +6,13 @@ import { useRoomStore } from './room'
 import router from '@/router'
 import userApi from '@/api/user'
 export interface User {
-    createdAt: string
-    email: string
-    id: string
-    updatedAt: string
-    username: string
+    createdAt?: string
+    email?: string
+    id?: string
+    updatedAt?: string
+    username?: string
+    token_type?: string
+    access_token?: string
 }
 
 
@@ -18,17 +20,17 @@ export const useUserStore = defineStore('user', {
     state: () => ({
         isLogin: false,
         token: '',
-        userInfo: {},
+        userInfo: {} as User,
     }),
     getters: {
         getToken: (state) => state.token,
     },
     actions: {
-        async login(data: any) {
+        async login(data: User) {
             this.isLogin = true;
-            this.token = data.access_token
+            this.token = data.access_token as string
             this.userInfo = data
-            localStorage.setItem('token', data.access_token)
+            localStorage.setItem('token', data.access_token as string)
             localStorage.setItem('userInfo', JSON.stringify(data))
             await useFriendStore().getFriends()
             await useSocketStore().initSocket()
