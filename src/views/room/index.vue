@@ -19,7 +19,7 @@
                       </div>
                       <div class="flex-1">
                           <div class="inline-block border border-gray-300 p-2 py-1 rounded-md relative text-sm">
-                              <img v-if="message.type === 'image'" :src="`${VITE_APP_API_FILE_URL}${message.content}`" alt=""
+                              <img v-if="message.type === 'image'" :src="`${VITE_APP_API_BASE_URL}${message.content}`" alt=""
                                   @click="handlePreviewImage(message.content)" class="h-24 rounded-md">
                               <span v-else class="whitespace-pre-wrap">
                                   {{ message.content }}
@@ -98,7 +98,7 @@ import ServerApi from "@/api";
 import dayjs from "@/plugin/dayjs";
 import serverApi from "@/api";
 
-const VITE_APP_API_FILE_URL = import.meta.env.VITE_APP_API_FILE_URL
+const VITE_APP_API_BASE_URL = import.meta.env.VITE_APP_API_BASE_URL
 
 const socketStore = useSocketStore();
 const userStore = useUserStore();
@@ -184,8 +184,9 @@ onMounted(() => {
     serverApi.UploadUser(formData).then((res:any) => {
       if (res.code === 200) {
         (socketStore.socket as Socket).emit('room', {
+          size: res.data.size,
           room: route.params.id,
-          content: res.data.filename,
+          content: `/${res.data.path}`,
           type: 'image'
         })
       }
@@ -194,7 +195,7 @@ onMounted(() => {
 });
 
 const handlePreviewImage = (url: string) => {
-  window.open(`${VITE_APP_API_FILE_URL}${url}`);
+  window.open(`${VITE_APP_API_BASE_URL}${url}`);
 };
 </script>
 <style lang="">
