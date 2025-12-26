@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
 import { User } from './user'
 import ServerApi from '@/api/index'
-import { set } from 'nprogress'
 
 interface Friend {
     createdAt: string
@@ -19,7 +18,7 @@ export const useFriendStore = defineStore('friend', {
     getters: {
         getFriendMap: (state) => {
             return state.friends.reduce((prev, cur) => {
-                prev[cur.friend_info.id] = cur
+                prev[cur.friend_info.id as string] = cur
                 return prev
             }, {} as Record<string, Friend>)
         },

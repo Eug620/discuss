@@ -23,7 +23,7 @@
 
         </div>
         <div v-for="friend in getFriends" @click="handleFriendClick(friend)" :key="friend.id"
-              class="cursor-pointer p-2 hover:bg-gray-300">{{ friend.friend_info.username }}</div>
+              class="cursor-pointer p-2 hover:bg-gray-300 " :class="[friendStore.getFriendMap[friend.friend_info.id]?.status ? 'text-gray-950' : 'text-gray-400']">{{ friend.friend_info.username }}</div>
       </div>
       <div class="flex-auto p-2 animate__fadeIn animate__animated">
           <router-view></router-view>
