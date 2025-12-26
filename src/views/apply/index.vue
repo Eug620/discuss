@@ -1,5 +1,5 @@
 <template lang="">
-    <div class="apply px-2 flex gap-4 h-full">
+    <div class="apply px-2 flex gap-2 h-full">
       <div class="flex-1 border-l border-r border-gray-300">
         <div class="border-b border-gray-300 text-center py-2">待处理申请</div>
         <div v-if="applyStore.pendingApplies.length > 0" class="p-2">
