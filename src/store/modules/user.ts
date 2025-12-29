@@ -28,15 +28,19 @@ export const useUserStore = defineStore('user', {
     },
     actions: {
         async login(data: User) {
-            this.isLogin = true;
-            this.token = data.access_token as string
-            this.userInfo = data
-            localStorage.setItem('token', data.access_token as string)
-            localStorage.setItem('userInfo', JSON.stringify(data))
-            await useFriendStore().getFriends()
-            await useSocketStore().initSocket()
-            useRoomStore().getRooms()
-            useDBStore().initDB(this.userInfo.id as string)
+            return new Promise(async (resolve, reject) => {
+                this.isLogin = true;
+                this.token = data.access_token as string
+                this.userInfo = data
+                localStorage.setItem('token', data.access_token as string)
+                localStorage.setItem('userInfo', JSON.stringify(data))
+                await useFriendStore().getFriends()
+                await useSocketStore().initSocket()
+                useRoomStore().getRooms()
+                useDBStore().initDB(this.userInfo.id as string)
+                resolve(true)
+            })
+
         },
         logout() {
             this.isLogin = false;

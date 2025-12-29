@@ -17,6 +17,7 @@ const Url:any = {
         'register': '/user',
         'userSearch': '/user/search',
         'userUpload': '/user/upload',
+        'GetCaptcha': '/captcha',
 
 
     }
@@ -70,5 +71,10 @@ export default {
             }
         })
     },
-
+    GetCaptcha() {
+        return request({
+            url: Url[requestServerName].GetCaptcha,
+            method: 'get'
+        })
+    }
 }

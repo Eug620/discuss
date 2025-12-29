@@ -9,6 +9,10 @@
             <input type="text" class="input" placeholder="用户名" v-model.trim="loginForm.username">
             <input type="password" class="input" placeholder="密码" @keydown.enter="handleLogin" v-model.trim="loginForm.password">
             <input type="text" class="input" placeholder="邮箱" @keydown.enter="handleLogin" v-if="activeTab" v-model.trim="loginForm.email">
+            <div class="flex items-center gap-2 w-full">
+                <input type="text" class="input flex-1 w-[50%]" placeholder="验证码" @keydown.enter="handleLogin" v-model.trim="loginForm.captcha">
+                <div v-html="captchaImg"  class="h-[40px] captchaImg cursor-pointer" @click="handleGetCaptcha"></div>
+            </div>
             <button type="submit" @click="handleLogin">提交</button>
         </div>
     </div>
@@ -24,10 +28,12 @@ const activeTab = ref(false)
 
 const userStore = useUserStore()
 const loginForm = reactive({
+    captcha: '',
     username: '',
     password: '',
     email: ''
 })
+const captchaImg = ref('')
 
 
 const handleLogin = () => {
@@ -37,8 +43,8 @@ const handleLogin = () => {
     if (activeTab.value && !loginForm.email) {
         return
     }
-    serverApi[activeTab.value ? 'Register' : 'Login'](loginForm).then((res: any) => {
-        !activeTab.value && userStore.login(res.data)
+    serverApi[activeTab.value ? 'Register' : 'Login'](loginForm).then(async (res: any) => {
+        !activeTab.value && await userStore.login(res.data)
         !activeTab.value && router.push('/')
         if (activeTab.value) {
             activeTab.value = false
@@ -46,7 +52,19 @@ const handleLogin = () => {
     })
 }
 
-</script>
-<style lang="">
+function handleGetCaptcha() {
+    loginForm.captcha = ''
+    serverApi.GetCaptcha().then((res: any) => {
+        captchaImg.value = res
+    })
+}
+handleGetCaptcha()
 
+</script>
+<style lang="scss">
+.captchaImg{
+    svg{
+        height: 100%;
+    }
+}
 </style>
