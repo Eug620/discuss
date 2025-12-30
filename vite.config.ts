@@ -34,5 +34,8 @@ export default defineConfig(({ mode }) => {
       },
       extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
     },
+    build: {
+      sourcemap: false, // 关闭 source map
+    },
   }
 })
