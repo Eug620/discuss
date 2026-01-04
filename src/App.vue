@@ -2,7 +2,7 @@
 import { useUserStore } from '@/store/modules/user'
 import { useDBStore } from '@/store/modules/database'
 import { useSocketStore } from '@/store/modules/socket'
-import { debounce } from 'lodash-es'
+import { debounce, cloneDeep } from 'lodash-es'
 import { watch, onUnmounted } from 'vue'
 
 const userStore = useUserStore()
@@ -22,10 +22,9 @@ userStore.init()
 onUnmounted(() => {
   // unsubscribe()
 })
-
 watch(() => [socketStore.userMessageMap, socketStore.roomMessageMap], debounce(([newUserMessageMap, newRoomMessageMap]) => {
-  dbStore.database?.setItem('User_Message', JSON.stringify(Array.from(newUserMessageMap)))
-  dbStore.database?.setItem('Room_Message', JSON.stringify(Array.from(newRoomMessageMap)))
+  dbStore.database?.setItem('User_Message', cloneDeep(newUserMessageMap))
+  dbStore.database?.setItem('Room_Message', cloneDeep(newRoomMessageMap))
 }, 1000),{ deep: true })
 
 

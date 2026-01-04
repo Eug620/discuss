@@ -18,10 +18,10 @@ export const useDBStore = defineStore('db', {
                 description: '用户信息存储'
             })
             this.database?.getItem('User_Message').then((data:any) => {
-                useSocketStore().userMessageMap = new Map(JSON.parse(data|| '[]'))
+                useSocketStore().userMessageMap = data || new Map()
             })
             this.database?.getItem('Room_Message').then((data:any) => {
-                useSocketStore().roomMessageMap = new Map(JSON.parse(data|| '[]'))
+                useSocketStore().roomMessageMap = data || new Map()
             })
         }
     }
