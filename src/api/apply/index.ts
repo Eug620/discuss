@@ -60,9 +60,9 @@ export default {
         })
     },
     // 申请加入房间
-    getApplyRoom(room_id: string) {
+    getApplyRoom(id: string) {
         return request({
-            url: `${Url[requestServerName].applyRoom}?room_id=${room_id}`,
+            url: `${Url[requestServerName].applyRoom}?id=${id}`,
             method: 'get',
         })
     },
