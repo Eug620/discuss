@@ -38,7 +38,7 @@
 <script lang="ts" setup>
 import { useUserStore } from "@/store/modules/user";
 import router from "@/router";
-import { ref } from "vue";
+import { onUnmounted, ref } from "vue";
 import serverApi from "@/api";
 import { RouterLink } from "vue-router";
 import { initRoutes } from "@/router/routes";
@@ -126,5 +126,12 @@ const handleResultClick = (result: any) => {
       });
   }
 };
+
+// 创建 SSE 连接
+const eventSource = serverApi.CreateEventSource();
+onUnmounted(() => {
+  // 关闭连接
+  eventSource.close()
+})
 </script>
 <style lang="scss"></style>
