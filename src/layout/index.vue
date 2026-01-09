@@ -128,10 +128,10 @@ const handleResultClick = (result: any) => {
 };
 
 // 创建 SSE 连接
-const eventSource = serverApi.CreateEventSource();
-onUnmounted(() => {
-  // 关闭连接
-  eventSource.close()
-})
+// const eventSource = serverApi.CreateEventSource();
+// onUnmounted(() => {
+//   // 关闭连接
+//   eventSource.close()
+// })
 </script>
 <style lang="scss"></style>
