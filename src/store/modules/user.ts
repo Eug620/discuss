@@ -58,8 +58,8 @@ export const useUserStore = defineStore('user', {
         },
 
         async getInfo() {
-            await useFriendStore().getFriends()
-            await useSocketStore().initSocket()
+            useSocketStore().initSocket()
+            useFriendStore().getFriends()
             useRoomStore().getRooms()
             useDBStore().initDB(this.userInfo.id as string)
         }
