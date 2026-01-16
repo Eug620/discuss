@@ -13,16 +13,26 @@ export function filterAsnycRouter(asyncRouterMap: any) {
     })
 }
 
-const pages = import.meta.glob('./views/**/*.vue', { eager: true });
-// 以 `./` 开头）或绝对路径（以 `/` 开头
+const pages = import.meta.glob('./views/**/*.vue');
+
+// 以 `./` 开头）或绝对路径（以 `/` 开头
+
+
 
 const resolveComponent = (name: any) => {
+
     const importPage:any = pages[`./${name}.vue`];
 
+
+
     if (!importPage) {
+
         throw new Error(`Unknown page ${name}. Is it located under Pages with a .vue extension?`);
+
     }
 
-    // return importPage().then(module => module.default);
-    return importPage.default
+
+
+    return importPage;
+
 }
