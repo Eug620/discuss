@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import routes from './routes'
 import NProgress from 'nprogress';
 
@@ -8,7 +8,7 @@ import { useMenuStore } from '@/store/modules/menu'
 const menuStore = useMenuStore(pinia)
 
 const router = createRouter({
-    history: createWebHashHistory(import.meta.env.VITE_APP_BASE_URL),
+    history: createWebHistory(import.meta.env.VITE_APP_BASE_URL),
     routes
 })
 
