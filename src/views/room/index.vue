@@ -32,9 +32,7 @@
                               {{ formatFileSize(message.size) }}
                           </span>
                       </div>
-                      <div class="flex items-start justify-end" :class="[
-                          message.sender === userStore.userInfo.id ? 'flex-row' : 'flex-row-reverse'
-                      ]">
+                      <div class="flex items-start justify-end" >
                           <div class="px-2 text-sm py-1 border border-transparent flex-shrink-0" v-if="message.sender !== userStore.userInfo.id">
                               <div class="w-6 h-6 rounded-full bg-gradient-to-br from-[#1f6feb] to-[#1a88e8] flex items-center justify-center text-white text-xs font-bold">
                                   {{ getUserInfo(message.sender)?.charAt(0)?.toUpperCase() || 'U' }}
