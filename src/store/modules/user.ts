@@ -14,6 +14,7 @@ export interface User {
     username?: string
     token_type?: string
     access_token?: string
+    role?: string
 }
 
 

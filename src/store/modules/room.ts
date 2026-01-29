@@ -16,7 +16,7 @@ export interface Room {
 export interface Rooms {
     id: string
     room_id: string
-    room_info: Rooms
+    room_info: Room
     user_id: string
     user_info: User
     createdAt: string
