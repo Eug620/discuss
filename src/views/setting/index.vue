@@ -1,9 +1,9 @@
 <template>
     <div class="w-full text-sm flex items-center justify-center h-full relative">
-        <div class="w-1/2 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <div v-for="(item, k) in userStore.userInfo" :key="k" class="flex">
-                <div class="w-[120px] text-right outline outline-1 outline-gray-300 p-1 pr-2">{{ k }}:</div>
-                <div class="flex-1 w-full auto-wrap outline outline-1 outline-gray-300 p-1 pl-2">{{ item }}</div>
+        <div class="w-1/2 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border border-gray-300">
+            <div v-for="(item, k) in userStore.userInfo" :key="k" class="flex border-b border-gray-300 last:border-b-0">
+                <div class="w-[120px] text-right border-r border-gray-300 p-3 pr-4">{{ k }}:</div>
+                <div class="flex-1 w-full auto-wrap p-3 pl-4">{{ item }}</div>
             </div>
         </div>
     </div>

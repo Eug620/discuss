@@ -76,8 +76,8 @@
         <span>{{ getFriendInfo.username }}</span>
         <span>{{ getFriendStatus ? '在线' : '离线' }}</span>
       </div>
+      <div class="text-sm" >{{ dayjs(getFriendInfo.createdAt).fromNow() }}</div>
       <div class="text-sm" >{{ getFriendInfo.email }}</div>
-      <div class="text-sm" >{{ new Date(getFriendInfo.createdAt).toLocaleString() }}</div>
     </div>
 
     <input class="hidden" id="chooseImage" type="file" accept="image/*">
