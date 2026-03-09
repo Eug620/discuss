@@ -3,7 +3,7 @@
     <div class="w-[60px] flex flex-col shadow-md animate__fadeIn animate__animated">
       <div class="flex-1">
         <div v-for="page in initRoutes" @click="handleClick(page)" :key="page.path"
-          class="cursor-pointer text-center p-2 hover:bg-gray-300">
+          class="cursor-pointer text-center p-2 hover:bg-gray-300" :class="{'bg-gray-300': getPath === page.path}">
           <div class="w-6 py-1 mx-auto " v-html="page.meta.icon"></div>
         </div>
       </div>
@@ -38,9 +38,9 @@
 <script lang="ts" setup>
 import { useUserStore } from "@/store/modules/user";
 import router from "@/router";
-import { onUnmounted, ref } from "vue";
+import { computed, onUnmounted, ref, watchEffect } from "vue";
 import serverApi from "@/api";
-import { RouterLink } from "vue-router";
+import { RouterLink, useRoute } from "vue-router";
 import { initRoutes } from "@/router/routes";
 
 function handleClick(page: any) {
@@ -93,6 +93,14 @@ const handleSetting = () => {
   });
 }
 
+const route = useRoute()
+const routePath = ref<string|undefined>(undefined)
+watchEffect(() =>{ 
+  routePath.value = route.path
+})
+const getPath = computed(() => {
+  return routePath.value?.split('/').filter(Boolean)[0]
+})
 
 
 // 搜索

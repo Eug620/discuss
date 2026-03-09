@@ -19,7 +19,7 @@
 
         </div>
         <div v-for="room in getRooms" @click="handleRoomClick(room)" :key="room.id"
-              class="cursor-pointer p-2 hover:bg-gray-300">{{ room.room_info.name }} </div>
+              class="cursor-pointer p-2 hover:bg-gray-300" :class="{'bg-gray-300': paramsID === room.room_id}">{{ room.room_info.name }} </div>
       </div>
       <div class="flex-auto p-2 animate__fadeIn animate__animated">
           <router-view></router-view>
@@ -29,7 +29,8 @@
 <script setup lang="ts">
 import { useRoomStore } from "@/store/modules/room";
 import router from "@/router";
-import { ref, computed } from "vue";
+import { ref, computed, watchEffect } from "vue";
+import { useRoute } from "vue-router";
 // https://heroicons.com/
 // 引入 heroicons 图标
 
@@ -37,6 +38,13 @@ const roomStore = useRoomStore();
 const roomName = ref('')
 const getRooms = computed(() => {
     return roomStore.rooms.filter((room: any) => room.room_info.name.includes(roomName.value))
+})
+
+const route = useRoute()
+const paramsID = ref<string|undefined>(undefined)
+
+watchEffect(() =>{ 
+  paramsID.value = route.params?.id as string
 })
 
 const handleRoomClick = (room: any) => {

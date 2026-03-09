@@ -26,6 +26,7 @@ function errorLog(error: Error, path?: any) {
 
     // 显示提示
     console.log(errorMsg, path || 'Error')
+    alert(errorMsg)
     /// 如果是401那就去登录 并且不能是mock
     if (error.message.includes('401') && import.meta.env.VITE_APP_BUILD_MODE !== 'true') {
         useUserStore(pinia).logout()

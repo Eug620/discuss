@@ -23,7 +23,7 @@
 
         </div>
         <div v-for="friend in getFriends" @click="handleFriendClick(friend)" :key="friend.id"
-              class="cursor-pointer p-2 hover:bg-gray-300 ">{{ friend.friend_info.username }}</div>
+              class="cursor-pointer p-2 hover:bg-gray-300 " :class="{'bg-gray-300': paramsID === friend.friend_info.id}">{{ friend.friend_info.username }}</div>
       </div>
       <div class="flex-auto p-2 animate__fadeIn animate__animated">
           <router-view></router-view>
@@ -33,12 +33,20 @@
 <script setup lang="ts">
 import { useFriendStore } from "@/store/modules/friend";
 import router from "@/router";
-import { ref, computed } from "vue";
+import { useRoute } from "vue-router";
+import { ref, computed, watchEffect } from "vue";
 
 const friendStore = useFriendStore();
 const username = ref('')
 const getFriends = computed(() => {
     return friendStore.friends.filter((friend: any) => friend.friend_info.username.includes(username.value))
+})
+
+const route = useRoute()
+const paramsID = ref<string|undefined>(undefined)
+
+watchEffect(() =>{ 
+  paramsID.value = route.params?.id as string
 })
 
 const handleFriendClick = (friend: any) => {
