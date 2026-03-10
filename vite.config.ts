@@ -33,7 +33,7 @@ export default defineConfig(({ mode }) => {
     ],
     server: {
       host: true,
-      port: 8000,
+      port: 8001,
       open: true,
       headers: {
         'Access-Control-Allow-Origin': '*',
