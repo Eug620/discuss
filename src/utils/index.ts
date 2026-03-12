@@ -21,30 +21,66 @@ function formatFileSize(bytes: number, options: FormatOptions = {}): string {
     space = true,
     base = 1024
   } = options;
-  
+
   if (bytes === 0) return `0${space ? ' ' : ''}${short ? 'B' : 'Bytes'}`;
-  
+
   const k = base;
   const i = Math.floor(Math.log(bytes) / Math.log(k));
-  
-  const sizes = short 
+
+  const sizes = short
     ? ['B', 'K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y']
     : base === 1024
       ? ['Bytes', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB']
       : ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-  
+
   const size = parseFloat((bytes / Math.pow(k, i)).toFixed(decimals));
   return `${size}${space ? ' ' : ''}${sizes[i]}`;
 }
 
 
- function scrollToBottom(id: string) {
-    nextTick(() =>{
-      document.getElementById(id)?.lastElementChild?.scrollIntoView({ 
-        behavior: 'smooth', 
-        block: 'end' 
-      });
-    })
-  }
+function scrollToBottom(id: string) {
+  nextTick(() => {
+    document.getElementById(id)?.lastElementChild?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end'
+    });
+  })
+}
 
-export { formatFileSize, type FormatOptions, scrollToBottom };
+/**
+ * 将数据导出为 JSON 文件并下载
+ * @param {any} data - 要导出的 JavaScript 数据（对象/数组/基本类型）
+ * @param {string} [filename='data.json'] - 下载的文件名，默认为 'data.json'
+ * @param {number|string} [indent=2] - JSON 字符串缩进空格数，设为 null 或 0 可输出压缩格式
+ * @returns {void}
+ */
+function downloadJSON(data: Object, filename = 'data.json', indent = 2) {
+  try {
+    // 将数据转换为 JSON 字符串，支持缩进美化
+    const jsonString = JSON.stringify(data, null, indent);
+
+    // 创建 Blob 对象，指定 MIME 类型为 application/json
+    const blob = new Blob([jsonString], { type: 'application/json' });
+
+    // 生成一个临时的对象 URL
+    const url = URL.createObjectURL(blob);
+
+    // 创建隐藏的 <a> 元素用于触发下载
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+
+    // 将链接添加到 DOM（某些浏览器需要）
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    // 释放临时 URL，避免内存泄漏
+    URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error('导出 JSON 文件失败：', error);
+    alert('导出失败，请稍后重试或检查数据格式。');
+  }
+}
+
+export { formatFileSize, type FormatOptions, scrollToBottom, downloadJSON };
