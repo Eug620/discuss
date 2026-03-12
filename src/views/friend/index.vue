@@ -9,8 +9,8 @@
  * Copyright (c) 2025 by ${git_name_email}, All Rights Reserved. 
 -->
 <template lang="">
-  <div class="w-full h-full flex gap-4 ">
-    <div class="w-full h-full flex flex-col gap-4">
+  <div class="w-full h-full flex gap-2 ">
+    <div class="w-full h-full flex flex-col gap-2">
         <div class="w-full text-center flex border-b border-gray-300 p-2 relative">
             <div class="flex-1 text-center">
               {{ getFriendInfo.username }} 
@@ -204,7 +204,7 @@ const handlePreviewImage = (url: string) => {
   window.open(`${VITE_APP_API_BASE_URL}${url}`);
 }
 
-const infoVisiable = ref(false)
+const infoVisiable = ref(true)
 const handleSwitchInfo = () => {
   infoVisiable.value = !infoVisiable.value
 }

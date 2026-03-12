@@ -1,6 +1,6 @@
 <template lang="">
-  <div class="w-full h-full flex gap-4 ">
-      <div class="w-full h-full flex-1 flex flex-col gap-4">
+  <div class="w-full h-full flex gap-2 ">
+      <div class="w-full h-full flex-1 flex flex-col gap-2">
           <div class="w-full text-center flex border-b border-gray-300 p-2 relative">
               <div class="flex-1 text-center">
                   {{ getRoomInfo.name }}
@@ -257,7 +257,7 @@ const handlePreviewImage = (url: string) => {
 };
 
 
-const infoVisiable = ref(false)
+const infoVisiable = ref(true)
 const handleSwitchInfo = () => {
   infoVisiable.value = !infoVisiable.value
 }
