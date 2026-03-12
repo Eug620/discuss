@@ -11,9 +11,9 @@
 <template lang="">
   <div class="w-full h-full flex">
       <div class="w-[240px] shadow-md animate__fadeIn animate__animated">
-        <div class="flex justify-center items-center gap-2 p-2 text-xs">
+        <div class="flex justify-center items-center gap-2 p-2 text-xs border-b border-gray-300">
 
-            <input type="text" placeholder="输入用户名" v-model="username" class="w-full rounded-md p-2 h-8 border focus:outline-none border-gray-300 flex justify-center items-center"/>
+            <input type="text" placeholder="输入用户名" v-model="username" class="w-full rounded-md p-2 h-8 border focus:outline-none  flex justify-center items-center"/>
 
             <router-link to="/friend/search">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -22,8 +22,15 @@
             </router-link>
 
         </div>
-        <div v-for="friend in getFriends" @click="handleFriendClick(friend)" :key="friend.id"
-              class="cursor-pointer p-2 hover:bg-gray-300 " :class="{'bg-gray-300': paramsID === friend.friend_info.id}">{{ friend.friend_info.username }}</div>
+        <div 
+          v-for="friend in getFriends" 
+          @click="handleFriendClick(friend)" 
+          :key="friend.id"
+          class="cursor-pointer p-2 hover:bg-gray-300 " 
+          :class="{
+            'bg-gray-300': paramsID === friend.friend_info.id, 
+            'text-green-700': friendStore.getFriendMap[friend.friend_info.id]?.status
+          }">{{ friend.friend_info.username }}</div>
       </div>
       <div class="flex-auto p-2 animate__fadeIn animate__animated">
           <router-view></router-view>

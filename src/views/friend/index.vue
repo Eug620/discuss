@@ -81,7 +81,6 @@
           </svg>
           {{ getFriendInfo.username }}
         </span>
-        <span>{{ getFriendStatus ? '在线' : '离线' }}</span>
       </div>
       <div class="text-sm flex gap-1 items-center" >
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
@@ -129,9 +128,6 @@ const getFriendInfo = computed(() => {
   return friendStore.getFriendMap[route.params.id as string]?.friend_info || {}
 })
 
-const getFriendStatus = computed(() => {
-  return friendStore.getFriendMap[route.params.id as string]?.status || false
-})
 
 
 const handleSend = () => {
