@@ -11,10 +11,16 @@
 <template lang="">
   <div class="w-full h-full flex gap-4 ">
     <div class="w-full h-full flex flex-col gap-4">
-        <div class="w-full text-center border-b border-gray-300 pb-2 relative">
-            <div :class="[]">
+        <div class="w-full text-center flex border-b border-gray-300 p-2 relative">
+            <div class="flex-1 text-center">
               {{ getFriendInfo.username }} 
             </div>
+            
+            <button class="cursor-pointer" @click="handleSwitchInfo">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+              </svg>
+            </button>
         </div>
         <div class="w-full h-full p-4 flex-1 overflow-y-auto relative" id="messageContainer">
            <div v-for="message in getHistory" :key="message.id" class="w-full h-auto p-2" :style="{
@@ -70,8 +76,13 @@
 
         </div>
     </div>
-    <div class="w-[200px] h-full border-l border-gray-300 flex flex-col gap-2 p-2 pt-0">
-      <div class="border-b border-gray-300 pb-2">用户信息</div>
+    <div class="w-[200px] h-full border-l border-gray-300 flex flex-col gap-2 p-2 pt-0" v-show="infoVisiable">
+      <div class="border-b border-gray-300 p-2 pl-0">
+        <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+        </svg> -->
+        用户信息
+      </div>
       <div class="text-sm  flex justify-between" >
         
 
@@ -191,6 +202,11 @@ watch(
 
 const handlePreviewImage = (url: string) => {
   window.open(`${VITE_APP_API_BASE_URL}${url}`);
+}
+
+const infoVisiable = ref(false)
+const handleSwitchInfo = () => {
+  infoVisiable.value = !infoVisiable.value
 }
 </script>
 <style lang="">

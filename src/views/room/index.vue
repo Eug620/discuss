@@ -1,10 +1,16 @@
 <template lang="">
   <div class="w-full h-full flex gap-4 ">
       <div class="w-full h-full flex-1 flex flex-col gap-4">
-          <div class="w-full text-center border-b border-gray-300 pb-2 relative">
-              <div class="">
+          <div class="w-full text-center flex border-b border-gray-300 p-2 relative">
+              <div class="flex-1 text-center">
                   {{ getRoomInfo.name }}
               </div>
+                          
+              <button class="cursor-pointer" @click="handleSwitchInfo">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                </svg>
+              </button>
           </div>
 
           <div class="w-full h-full p-4 flex-1 overflow-y-auto" id="messageContainer">
@@ -65,9 +71,9 @@
 
           </div>
       </div>
-      <div class="w-[200px] h-full border-l border-gray-300 flex flex-col gap-2 p-2 pt-0">
+      <div class="w-[200px] h-full border-l border-gray-300 flex flex-col gap-2 p-2 pt-0" v-show="infoVisiable">
           <div class="flex-1">
-              <div class="border-b border-gray-300 pb-2">群成员</div>
+              <div class="border-b border-gray-300 p-2 pl-0">群成员</div>
               <div v-for="member in getMember" :key="member.user_id"
                   class="text-sm flex justify-between items-center py-1" :class="{
                       'underline underline-offset-2': member.user_id === userStore.userInfo.id,
@@ -249,6 +255,12 @@ watch(
 const handlePreviewImage = (url: string) => {
   window.open(`${VITE_APP_API_BASE_URL}${url}`);
 };
+
+
+const infoVisiable = ref(false)
+const handleSwitchInfo = () => {
+  infoVisiable.value = !infoVisiable.value
+}
 </script>
 <style lang="">
 </style>

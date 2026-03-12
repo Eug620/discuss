@@ -13,7 +13,7 @@
       <div class="w-[240px] shadow-md animate__fadeIn animate__animated">
         <div class="flex justify-center items-center gap-2 p-2 text-xs border-b border-gray-300">
 
-            <input type="text" placeholder="输入用户名" v-model="username" class="w-full rounded-md p-2 h-8 border focus:outline-none  flex justify-center items-center"/>
+            <input type="text" placeholder="输入用户名" v-model="username" class="w-full rounded-md p-2 h-8 border border-gray-100 focus:outline-none  flex justify-center items-center"/>
 
             <router-link to="/friend/search">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
